@@ -54,14 +54,13 @@ android {
 
 dependencies {
 
-
-    implementation (libs.converter.gson)
-    implementation (libs.logging.interceptor)
-
+    implementation(libs.ui)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
     implementation(libs.androidx.room.runtime)
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
-    kapt (libs.androidx.room.compiler)
+    kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.material)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.hilt.navigation.compose)

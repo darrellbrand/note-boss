@@ -18,6 +18,7 @@ material = "1.6.8"
 navigationCompose = "2.7.7"
 retrofit = "2.11.0"
 retrofitVersion = "2.9.0"
+ui = "1.6.8"
 uiTextGoogleFonts = "1.6.8"
 
 [libraries]
@@ -54,6 +55,7 @@ logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", ver
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 retrofit-v290 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
+ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

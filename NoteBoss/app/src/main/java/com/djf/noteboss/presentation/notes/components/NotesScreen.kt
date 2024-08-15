@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.FloatingActionButton
@@ -57,14 +59,15 @@ fun NotesScreen(
             FloatingActionButton(
                 onClick = { navController.navigate(Screen.AddEditNotesScreen.route) },
                 backgroundColor = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(50.dp)
+                modifier = Modifier
             ) {
 
                 Icon(imageVector = Icons.Default.Add, contentDescription = "add note")
             }
 
         },
-        scaffoldState = scaffoldState
+        scaffoldState = scaffoldState,
+        modifier = Modifier.imePadding().systemBarsPadding()
     ) {
         Column(
             modifier = Modifier

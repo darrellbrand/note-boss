@@ -29,6 +29,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarDuration
+import androidx.compose.material.SnackbarResult
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -36,7 +39,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderState
@@ -58,11 +61,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.djf.noteboss.domain.model.Note
+import com.djf.noteboss.presentation.notes.components.NotesEvent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AddEditNoteScreen(
     navController: NavController,
@@ -83,11 +87,11 @@ fun AddEditNoteScreen(
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
                 is AddEditNoteViewModel.UiEvent.ShowSnackBar -> {
-                    scaffoldState.snackbarHostState.showSnackbar(
-                        message = event.message
-                    )
-                }
-
+                        scaffoldState.snackbarHostState.showSnackbar(
+                            message = event.message,
+                            duration = SnackbarDuration.Short
+                        )
+                    }
                 AddEditNoteViewModel.UiEvent.SaveNote -> {
                     navController.navigateUp()
                 }
@@ -102,7 +106,7 @@ fun AddEditNoteScreen(
             Icon(imageVector = Icons.Default.Star, contentDescription = " save note")
         }
 
-    }) {
+    }, scaffoldState = scaffoldState) {
         Column(
             modifier = Modifier
                 .fillMaxSize()

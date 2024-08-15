@@ -9,19 +9,22 @@ import com.djf.noteboss.ui.theme.purpleNote
 import com.djf.noteboss.ui.theme.yellowNote
 
 @Entity
-data class Note(val title: String,
+data class Note(
+    val title: String,
     val content: String,
     val timestamp: Long,
     val color: Int,
-@PrimaryKey
-    val id : Int? =  null
+    val link: String? = null,
+    val hasLink: Boolean = false,
+    @PrimaryKey
+    val id: Int? = null
 
-)
-{
-    companion object{
-       val noteColors = listOf(orangeNote, yellowNote, blueNote, purpleNote, greenNote)
+) {
+    companion object {
+        val noteColors = listOf(orangeNote, yellowNote, blueNote, purpleNote, greenNote)
     }
 }
-class InvalidNoteException(message : String) : Exception (message){
+
+class InvalidNoteException(message: String) : Exception(message) {
 
 }

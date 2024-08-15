@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("androidx.room")
 }
 
 android {
@@ -52,18 +53,31 @@ android {
 }
 
 dependencies {
+
+
+    implementation (libs.converter.gson)
+    implementation (libs.logging.interceptor)
+
+    implementation(libs.androidx.room.runtime)
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation(libs.androidx.room.ktx)
+    kapt (libs.androidx.room.compiler)
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.navigation.compose)
     // ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     // ViewModel utilities for Compose
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-    implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.ui.text.google.fonts)
-    annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     // To use Kotlin annotation processing tool (kapt)
-    implementation (libs.retrofit)
+    implementation(libs.retrofit)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -81,4 +95,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
 
+}
+kapt {
+    correctErrorTypes = true
+}
+room {
+    schemaDirectory("$projectDir/schemas")
 }

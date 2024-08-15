@@ -1,6 +1,5 @@
 package com.djf.noteboss.data.repository
 
-import androidx.compose.runtime.collectAsState
 import com.djf.noteboss.data.data_source.NoteDao
 import com.djf.noteboss.domain.model.Note
 import com.djf.noteboss.domain.repository.NoteRepository

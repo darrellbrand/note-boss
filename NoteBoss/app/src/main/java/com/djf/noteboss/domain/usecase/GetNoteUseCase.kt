@@ -6,7 +6,7 @@ import com.djf.noteboss.domain.repository.NoteRepository
 class GetNoteUseCase(private val noteRepository: NoteRepository) {
 
 
-    suspend operator fun invoke(note: Note): Note? {
-        return note.id?.let { noteRepository.getNoteById(it) }
+    suspend operator fun invoke(noteId: Int): Note? {
+        return noteId.let { noteRepository.getNoteById(it) }
     }
 }

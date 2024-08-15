@@ -75,7 +75,7 @@ fun NotesScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Your Note", style = MaterialTheme.typography.bodyMedium)
+                Text(text = "Your Notes", style = MaterialTheme.typography.bodyMedium)
                 IconButton(onClick = { viewModel.onEvent(NotesEvent.ToggleOrderSection) }) {
                     Icon(imageVector = Icons.Default.Menu, contentDescription = "sort")
                 }

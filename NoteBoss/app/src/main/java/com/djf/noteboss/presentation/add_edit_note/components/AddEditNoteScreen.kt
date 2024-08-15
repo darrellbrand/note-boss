@@ -74,11 +74,12 @@ fun AddEditNoteScreen(
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
                 is AddEditNoteViewModel.UiEvent.ShowSnackBar -> {
-                        scaffoldState.snackbarHostState.showSnackbar(
-                            message = event.message,
-                            duration = SnackbarDuration.Short
-                        )
-                    }
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.message,
+                        duration = SnackbarDuration.Short
+                    )
+                }
+
                 AddEditNoteViewModel.UiEvent.SaveNote -> {
                     navController.navigateUp()
                 }
@@ -88,7 +89,7 @@ fun AddEditNoteScreen(
     Scaffold(floatingActionButton = {
         FloatingActionButton(
             onClick = { viewModel.onEvent(AddEditNoteEvent.SaveNote) },
-            backgroundColor = MaterialTheme.colorScheme.primary
+            backgroundColor = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(30.dp)
         ) {
             Icon(imageVector = Icons.Default.Star, contentDescription = " save note")
         }
@@ -102,6 +103,7 @@ fun AddEditNoteScreen(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.SpaceEvenly,
         ) {
+            Spacer(modifier = Modifier.height(15.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -141,17 +143,17 @@ fun AddEditNoteScreen(
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.weight(1/8f)
+                modifier = Modifier.weight(1 / 8f)
             ) {
                 Spacer(modifier = Modifier.width(15.dp))
                 Switch(
                     checked = contentState.isLinkEnabled,
                     onCheckedChange = { viewModel.onEvent(AddEditNoteEvent.ToggleSwitch(it)) },
                     modifier = Modifier, colors = androidx.compose.material3.SwitchDefaults.colors(
-                        checkedThumbColor = MaterialTheme.colorScheme.primary,
+                        checkedThumbColor = Color(viewModel.noteColor.value),//MaterialTheme.colorScheme.primary,
                         checkedTrackColor = MaterialTheme.colorScheme.onPrimary,
                         uncheckedThumbColor = MaterialTheme.colorScheme.secondary,
-                        uncheckedTrackColor = MaterialTheme.colorScheme.onSecondary
+                        uncheckedTrackColor = MaterialTheme.colorScheme.onSecondary,
                     )
                 )
                 Spacer(modifier = Modifier.width(10.dp))
@@ -178,7 +180,7 @@ fun AddEditNoteScreen(
             TransparentHintTextField(
                 text = contentState.text,
                 hint = "Enter content",//contentState.hint,
-                modifier = Modifier.weight(1/2f),
+                modifier = Modifier.weight(1 / 2f),
                 onValueChange = { viewModel.onEvent(AddEditNoteEvent.EnteredContent(it)) },
                 onFocusChange = {
                     viewModel.onEvent(AddEditNoteEvent.ChangeContentFocus(it))
@@ -193,7 +195,11 @@ fun AddEditNoteScreen(
                     thickness = 3.dp
                 )
                 Spacer(modifier = Modifier.height(15.dp))
-                Text(text = "Cloud Link", style = MaterialTheme.typography.headlineSmall, modifier = Modifier)
+                Text(
+                    text = "Cloud Link",
+                    style = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier
+                )
                 Spacer(modifier = Modifier.height(15.dp))
                 SelectionContainer {
                     Text(text = contentState.link, style = MaterialTheme.typography.titleLarge)

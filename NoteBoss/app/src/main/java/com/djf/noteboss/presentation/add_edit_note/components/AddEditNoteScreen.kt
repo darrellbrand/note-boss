@@ -2,13 +2,10 @@ package com.djf.noteboss.presentation.add_edit_note.components
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.Animatable
-import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +20,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
@@ -31,23 +27,15 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarDuration
-import androidx.compose.material.SnackbarResult
-import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-
-import androidx.compose.material3.SegmentedButtonDefaults
-import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderState
 import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.asIntState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -61,7 +49,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.djf.noteboss.domain.model.Note
-import com.djf.noteboss.presentation.notes.components.NotesEvent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -153,7 +140,8 @@ fun AddEditNoteScreen(
             }
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.weight(1/8f)
             ) {
                 Spacer(modifier = Modifier.width(15.dp))
                 Switch(
@@ -190,7 +178,7 @@ fun AddEditNoteScreen(
             TransparentHintTextField(
                 text = contentState.text,
                 hint = "Enter content",//contentState.hint,
-                modifier = Modifier,//.fillMaxHeight(),
+                modifier = Modifier.weight(1/2f),
                 onValueChange = { viewModel.onEvent(AddEditNoteEvent.EnteredContent(it)) },
                 onFocusChange = {
                     viewModel.onEvent(AddEditNoteEvent.ChangeContentFocus(it))
@@ -205,7 +193,7 @@ fun AddEditNoteScreen(
                     thickness = 3.dp
                 )
                 Spacer(modifier = Modifier.height(15.dp))
-                Text(text = "Cloud Link", style = MaterialTheme.typography.headlineSmall)
+                Text(text = "Cloud Link", style = MaterialTheme.typography.headlineSmall, modifier = Modifier)
                 Spacer(modifier = Modifier.height(15.dp))
                 SelectionContainer {
                     Text(text = contentState.link, style = MaterialTheme.typography.titleLarge)

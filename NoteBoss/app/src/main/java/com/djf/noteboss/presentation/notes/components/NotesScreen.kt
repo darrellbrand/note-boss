@@ -57,6 +57,7 @@ fun NotesScreen(
             FloatingActionButton(
                 onClick = { navController.navigate(Screen.AddEditNotesScreen.route) },
                 backgroundColor = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(50.dp)
             ) {
 
                 Icon(imageVector = Icons.Default.Add, contentDescription = "add note")

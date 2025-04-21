@@ -67,7 +67,7 @@ fun NotesScreen(
 
         },
         scaffoldState = scaffoldState,
-        modifier = Modifier.imePadding().systemBarsPadding()
+        modifier = Modifier.imePadding().systemBarsPadding() 
     ) {
         Column(
             modifier = Modifier
